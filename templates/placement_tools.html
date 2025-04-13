@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Placement Tools{% endblock %}
+
+{% block content %}
+<div class="container py-5" style="max-width: 960px;">
+    <h1 class="mb-4 fw-bold text-center text-primary">🎯 Placement Tools</h1>
+    <p class="text-muted text-center mb-5">Streamline your job search with these essential tools.</p>
+
+    <div class="row g-4">
+        <!-- Resume Builder -->
+        <div class="col-md-4">
+            <a href="https://novoresume.com/" target="_blank" class="text-decoration-none">
+                <div class="card h-100 border-0 shadow-sm rounded-4 text-center p-4" style="background-color: #f9f9f9; transition: 0.3s;">
+                    <i class="bi bi-file-earmark-text fs-1 text-success mb-3"></i>
+                    <h5 class="mb-2 text-dark">Resume Builder</h5>
+                    <p class="text-muted">Craft a stunning resume quickly and easily.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Mock Interviews -->
+        <div class="col-md-4">
+            <a href="https://interviewing.io/" target="_blank" class="text-decoration-none">
+                <div class="card h-100 border-0 shadow-sm rounded-4 text-center p-4" style="background-color: #f9f9f9; transition: 0.3s;">
+                    <i class="bi bi-mic fs-1 text-primary mb-3"></i>
+                    <h5 class="mb-2 text-dark">Mock Interviews</h5>
+                    <p class="text-muted">Practice interviews with real engineers.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Job Tracker -->
+        <div class="col-md-4">
+            <a href="https://huntr.co/" target="_blank" class="text-decoration-none">
+                <div class="card h-100 border-0 shadow-sm rounded-4 text-center p-4" style="background-color: #f9f9f9; transition: 0.3s;">
+                    <i class="bi bi-clipboard-check fs-1 text-warning mb-3"></i>
+                    <h5 class="mb-2 text-dark">Job Tracker</h5>
+                    <p class="text-muted">Track applications and manage your job search.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

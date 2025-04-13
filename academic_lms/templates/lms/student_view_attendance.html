@@ -1,0 +1,26 @@
+<!-- student_view_attendance.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Your Attendance</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Course</th>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for attendance in attendances %}
+                <tr>
+                    <td>{{ attendance.course.title }}</td>
+                    <td>{{ attendance.date }}</td>
+                    <td>{{ attendance.get_status_display }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

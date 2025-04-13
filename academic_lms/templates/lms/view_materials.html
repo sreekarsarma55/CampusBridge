@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Materials for {{ chapter.title }}</h2>
+    
+    {% if materials %}
+        <ul class="list-group mt-3">
+            {% for material in materials %}
+                <li class="list-group-item">
+                    <strong>{{ material.title }}</strong><br>
+                    Type: {{ material.get_material_type_display }}<br>
+                    {% if material.file %}
+                        <a href="{{ material.file.url }}" target="_blank">View File</a>
+                    {% endif %}
+                    {% if material.link %}
+                        <br><a href="{{ material.link }}" target="_blank">Open Link</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-muted mt-3">No materials available yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

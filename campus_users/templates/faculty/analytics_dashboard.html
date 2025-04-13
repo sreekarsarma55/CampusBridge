@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5 animate__animated animate__fadeIn">
+    <h2 class="fw-bold mb-4"><i class="bi bi-graph-up-arrow"></i> Class Analytics</h2>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-lg p-4">
+                <h5 class="text-center">Average Attendance</h5>
+                <canvas id="attendanceChart"></canvas>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-lg p-4">
+                <h5 class="text-center">Average Quiz Scores</h5>
+                <canvas id="quizChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Inject student_stats safely -->
+{{ student_stats|json_script:"student-stats" }}
+
+<script>
+    const stats = JSON.parse(document.getElementById('student-stats').textContent);
+
+    const courseNames = Object.keys(stats);
+    const attendanceValues = courseNames.map(course => stats[course].average_attendance);
+    const quizValues = courseNames.map(course => stats[course].average_quiz_scores);
+
+    // Attendance Chart
+    new Chart(document.getElementById('attendanceChart').getContext('2d'), {
+        type: 'bar',
+        data: {
+            labels: courseNames,
+            datasets: [{
+                label: 'Avg Attendance (%)',
+                data: attendanceValues,
+                backgroundColor: 'rgba(54, 162, 235, 0.7)'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: { display: true, text: 'Average Attendance per Course' },
+                legend: { display: false }
+            },
+            scales: {
+                y: { beginAtZero: true, max: 100 }
+            }
+        }
+    });
+
+    // Quiz Chart
+    new Chart(document.getElementById('quizChart').getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: courseNames,
+            datasets: [{
+                label: 'Avg Quiz Score',
+                data: quizValues,
+                fill: true,
+                borderColor: 'rgba(255, 99, 132, 1)',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                tension: 0.3
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: { display: true, text: 'Average Quiz Scores per Course' },
+            },
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+</script>
+{% endblock %}

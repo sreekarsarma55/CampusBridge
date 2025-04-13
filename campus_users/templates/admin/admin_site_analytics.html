@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5 animate__animated animate__fadeIn">
+    <h2 class="fw-bold mb-4"><i class="bi bi-graph-up"></i> Site Analytics</h2>
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card p-4 shadow">
+                <h5 class="text-center"><i class="bi bi-bar-chart-line-fill"></i> User Growth</h5>
+                <canvas id="growthChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Embed analytics data safely -->
+{{ analytics|json_script:"analytics-data" }}
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const analyticsData = JSON.parse(document.getElementById('analytics-data').textContent);
+    const growthData = analyticsData.growth;
+
+    const ctx = document.getElementById('growthChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: growthData.labels,
+            datasets: [{
+                label: 'New Users',
+                data: growthData.values,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2,
+                tension: 0.4,
+                fill: true,
+                pointRadius: 5
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: true, position: 'top' },
+                title: {
+                    display: true,
+                    text: 'Monthly User Growth',
+                    font: { size: 16 }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 10
+                    }
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

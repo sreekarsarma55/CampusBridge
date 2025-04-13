@@ -1,0 +1,12 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+
+<h1>Welcome to Campus Bridge Admin</h1>
+
+<p>
+    <a class="btn btn-primary" href="{% url 'faculty_signup' %}">➕ Register New Faculty</a>
+</p>
+
+{{ block.super }}
+
+{% endblock %}

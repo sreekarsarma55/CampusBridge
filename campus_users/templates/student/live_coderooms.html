@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h3 class="fw-bold">👥 Live Code Rooms</h3>
+    <div class="btn-group" role="group">
+        <button class="btn btn-primary">Create Room</button>
+        <button class="btn btn-secondary">Join Room</button>
+    </div>
+    <div class="mt-4">
+        <h5>Pair Programming</h5>
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Embed video + code editor side by side -->
+                <div class="d-flex">
+                    <div class="video-panel"></div>
+                    <div class="code-editor-panel"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5" data-aos="fade-up">
+    <h2 class="mb-3 fw-bold text-primary">
+        {{ track.title }}
+    </h2>
+    <p class="text-muted mb-5 fs-5">
+        {{ track.description }}
+    </p>
+
+    <div class="row">
+        {% for problem in problems %}
+        <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in" data-aos-delay="{{ forloop.counter0|add:"100" }}">
+            <div class="card h-100 shadow-lg border-light rounded-4">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <div>
+                        <h5 class="card-title fw-semibold text-dark mb-2">{{ problem.title }}</h5>
+                        <p class="card-text text-muted small mb-3">
+                            {{ problem.description|truncatewords:18 }}
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mt-auto">
+                        <span class="badge bg-gradient bg-info text-dark px-3 py-1 rounded-pill">
+                            {{ problem.difficulty }}
+                        </span>
+                        <a href="{% url 'skill_coding:problem_detail' problem.id %}" class="btn btn-sm btn-outline-primary">
+                            <i class="bi bi-code-slash"></i> Solve
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-warning text-center" role="alert">
+                🚧 No problems have been added to this track yet.
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

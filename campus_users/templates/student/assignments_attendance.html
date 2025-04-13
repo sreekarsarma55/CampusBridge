@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h3 class="fw-bold">📝 Assignments & Attendance</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <h5>Upcoming Assignments</h5>
+            <!-- Use a calendar or list view here -->
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action">Assignment 1 - Due: April 15</a>
+                <a href="#" class="list-group-item list-group-item-action">Coding Challenge - Due: April 17</a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h5>Attendance Tracker</h5>
+            <!-- Attendance progress or heatmap can go here -->
+            <div class="progress mb-3">
+                <div class="progress-bar" style="width: 85%" role="progressbar"></div>
+            </div>
+            <div id="attendanceHeatmap">Attendance Heatmap</div>
+        </div>
+    </div>
+</div>
+{% endblock %}

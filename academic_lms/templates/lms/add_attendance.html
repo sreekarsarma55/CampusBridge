@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5" data-aos="fade-up">
+    <h3 class="mb-4 fw-bold text-primary">
+        <i class="bi bi-person-check-fill me-2"></i>Mark Attendance for {{ course.title }}
+    </h3>
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+        
+        <div class="mb-4">
+            <label for="date" class="form-label fw-semibold">Select Date (optional):</label>
+            <input type="date" class="form-control" id="date" name="date" value="{{ today|date:'Y-m-d' }}">
+        </div>
+    
+        <div class="row">
+            {% for student in students %}
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm border-0" data-aos="zoom-in" data-aos-delay="{{ forloop.counter0|add:'1' }}00">
+                    <div class="card-body">
+                        <h5 class="card-title fw-semibold">{{ student.get_full_name|default:student.username }}</h5>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="student_{{ student.id }}" id="present_{{ student.id }}" value="P" required>
+                            <label class="form-check-label text-success fw-semibold" for="present_{{ student.id }}">
+                                Present
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="student_{{ student.id }}" id="absent_{{ student.id }}" value="A">
+                            <label class="form-check-label text-danger fw-semibold" for="absent_{{ student.id }}">
+                                Absent
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    
+        <div class="d-flex justify-content-between mt-4">
+            <a href="javascript:history.back()" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left me-1"></i> Back
+            </a>
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-save me-1"></i>Submit Attendance
+            </button>
+        </div>
+    </form>
+    
+</div>
+{% endblock %}

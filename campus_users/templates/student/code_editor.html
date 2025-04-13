@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h3 class="fw-bold mb-4">💻 Code Editor</h3>
+    <div class="card shadow-lg">
+        <div class="card-body">
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Select Language</label>
+                <select class="form-select" id="languageSelect">
+                    <option>Python</option>
+                    <option>C</option>
+                    <option>C++</option>
+                    <option>Java</option>
+                </select>
+            </div>
+
+            <label class="form-label fw-semibold">Code</label>
+            <textarea id="codeEditor" rows="12" class="form-control" placeholder="Write your code here..."></textarea>
+
+            <label class="form-label fw-semibold mt-3">Input (optional)</label>
+            <textarea id="inputData" rows="3" class="form-control" placeholder="Enter input for your code..."></textarea>
+
+            <button id="runBtn" class="btn btn-success mt-4 w-100"><i class="bi bi-play-fill"></i> Run</button>
+
+            <div id="consoleOutput" class="mt-4 bg-dark text-white p-3 rounded" style="min-height: 150px;">
+                <strong>Output:</strong>
+                <pre id="outputText" class="mt-2 text-light"></pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('runBtn').addEventListener('click', function () {
+        const code = document.getElementById('codeEditor').value;
+        const language = document.getElementById('languageSelect').value;
+        const input = document.getElementById('inputData').value;
+        const output = document.getElementById('outputText');
+        const btn = document.getElementById('runBtn');
+
+        output.innerText = "Running...";
+        btn.disabled = true;
+        btn.innerText = "Running...";
+
+        fetch("{% url 'run_code' %}", {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({
+                code: code,
+                language: language,
+                input: input
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            output.innerText = data.output || data.error;
+            btn.disabled = false;
+            btn.innerText = "Run";
+        })
+        .catch(err => {
+            output.innerText = "Error occurred!";
+            btn.disabled = false;
+            btn.innerText = "Run";
+        });
+    });
+</script>
+{% endblock %}

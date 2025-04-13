@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5" data-aos="fade-up" data-aos-delay="100">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="card border-0 shadow-lg rounded-4">
+                <div class="card-header bg-gradient text-white text-center rounded-top-4"
+                     style="background: linear-gradient(135deg, #007bff, #00c6ff);">
+                    <h3 class="fw-semibold mb-0">📝 Add New Problem</h3>
+                </div>
+                <div class="card-body px-4 py-5 bg-light rounded-bottom-4">
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <div class="mb-4">
+                            <label for="id_title" class="form-label fw-semibold">Problem Title</label>
+                            <input type="text" name="title" id="id_title" class="form-control shadow-sm" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="id_description" class="form-label fw-semibold">Description</label>
+                            <textarea name="description" id="id_description" class="form-control shadow-sm" rows="4" required></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="id_sample_input" class="form-label fw-semibold">Sample Input</label>
+                            <textarea name="sample_input" id="id_sample_input" class="form-control shadow-sm" rows="2" required></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="id_sample_output" class="form-label fw-semibold">Sample Output</label>
+                            <textarea name="sample_output" id="id_sample_output" class="form-control shadow-sm" rows="2" required></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="id_expected_output" class="form-label fw-semibold">Expected Output</label>
+                            <textarea name="expected_output" id="id_expected_output" class="form-control shadow-sm" rows="2" required></textarea>
+                        </div>
+
+                        <div class="mb-5">
+                            <label for="id_difficulty" class="form-label fw-semibold">Difficulty</label>
+                            <select name="difficulty" id="id_difficulty" class="form-select shadow-sm" required>
+                                <option value="">Select</option>
+                                <option value="Easy">Easy</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Hard">Hard</option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg shadow-sm">
+                                <i class="bi bi-plus-circle me-1"></i> Add Problem
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

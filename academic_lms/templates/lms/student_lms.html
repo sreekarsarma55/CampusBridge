@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4" data-aos="fade-up">
+    <h2 class="mb-4 fw-bold"><i class="bi bi-journals text-primary me-2"></i>Learning Management System</h2>
+
+    <div class="row">
+        {% for course in courses %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title text-dark fw-semibold">{{ course.name }}</h5>
+                    <p class="card-text text-muted">{{ course.description|truncatewords:20 }}</p>
+                    <a href="{% url 'academic_lms:student_course_detail' course.id %}" class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-eye-fill me-1"></i>View Chapters
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-muted">No courses available.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

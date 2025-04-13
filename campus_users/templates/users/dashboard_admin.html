@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="d-flex">
+    <!-- Sidebar -->
+    <div class="sidebar bg-gradient p-3 text-white position-sticky shadow-lg" style="width: 250px; height: 90vh; border-radius: 15px; animation: slideInLeft 0.8s ease-in-out;">
+        <h4 class="fw-bold mb-4" style="color: #161616;">Admin Panel</h4>
+        <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white" href="{% url 'manage_users' %}">👥 Manage Users</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white" href="{% url 'faculty_access' %}">🧑‍🏫 Faculty Access</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white" href="{% url 'admin_student_records' %}">🎓 Student Records</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white" href="{% url 'course_management' %}">📂 Course Management</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white" href="{% url 'admin_site_analytics' %}">📈 Site Analytics</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white" href="{% url 'admin_system_settings' %}">🛠 System Settings</a>
+            </li>
+            <li class="nav-item mt-3">
+                <a class="nav-link text-danger fw-bold" href="{% url 'logout' %}">🚪 Logout</a>
+            </li>
+        </ul>
+    </div>
+    
+
+    <!-- Main Content -->
+    <div class="flex-grow-1 ms-4">
+        <div class="p-4 bg-white shadow rounded" style="animation: fadeIn 1s ease-in-out;">
+            <h3 class="fw-bold mb-3 text-primary">Welcome, {{ user.username }} 👑</h3>
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <div class="card text-center border-0 shadow rounded bg-primary text-white">
+                        <div class="card-body">
+                            <h5>👥 Total Users</h5>
+                            <p class="display-6">{{ total_users }}</p> <!-- Dynamic Value -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-center border-0 shadow rounded bg-info text-white">
+                        <div class="card-body">
+                            <h5>🧑‍🏫 Total Faculty</h5>
+                            <p class="display-6">{{ total_faculty }}</p> <!-- Dynamic Value -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Extra Section -->
+            <div class="mt-5">
+                <h5 class="fw-bold mb-3">📢 System Notices</h5>
+                {% for notice in system_notices %}
+                    <div class="alert alert-warning">{{ notice }}</div> <!-- Dynamic Notices -->
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+@keyframes slideInLeft {
+    from { transform: translateX(-100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.sidebar {
+    background:color(white)
+}
+
+.sidebar .nav-link {
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #1d6472 !important; /* darker teal */
+    color: white !important;
+    text-decoration: none !important;
+    transform: scale(1.02);
+}
+
+/* Card colors for main content */
+.bg-primary {
+    background-color: #3498db !important; /* Soft blue */
+}
+
+.bg-info {
+    background-color: #1abc9c !important; /* Soft teal */
+}
+
+/* Alert styles for notices */
+.alert-warning {
+    background-color: #f39c12; /* Warm yellow */
+    color: white;
+}
+</style>
+{% endblock %}

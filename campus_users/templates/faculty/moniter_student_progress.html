@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5 animate__animated animate__fadeIn">
+    <h2 class="fw-bold mb-4"><i class="bi bi-graph-up"></i> Monitor Student Progress</h2>
+    <div class="card shadow-lg p-4">
+        <div class="mb-3">
+            <label class="form-label">Filter by Course</label>
+            <select class="form-select" onchange="window.location.href='?course=' + this.value;">
+                <option selected disabled>Select course</option>
+                <option value="Application Dev 1">Application Dev 1</option>
+                <option value="DBMS">DBMS</option>
+            </select>
+        </div>
+        <table class="table table-hover mt-3">
+            <thead class="table-dark">
+                <tr>
+                    <th>Student Name</th>
+                    <th>Attendance</th>
+                    <th>Quiz Scores</th>
+                    <th>Code Streak</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                    <tr>
+                        <td>{{ student.name }}</td>
+                        <td>{{ student.attendance }}%</td>
+                        <td>{{ student.quiz_scores }}%</td>
+                        <td>{{ student.code_streak }} days</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button class="btn btn-outline-secondary mt-3"><i class="bi bi-download"></i> Export CSV</button>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">Your Attendance</h2>
+    <p>Overall Attendance: {{ attendance_percentage }}%</p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Course</th>
+                <th>Status</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for attendance in attendances %}
+                <tr>
+                    <td>{{ attendance.course.title }}</td>
+                    <td>{{ attendance.get_status_display }}</td>
+                    <td>{{ attendance.date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

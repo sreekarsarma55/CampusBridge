@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5" style="animation: fadeIn 1s ease-in-out;">
+    <h2 class="fw-bold mb-4"><i class="bi bi-upload"></i> Upload Course Material</h2>
+    <div class="card shadow-lg p-4">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">Select Course</label>
+                <select name="course" class="form-select">
+                    <option selected disabled>Select course</option>
+                    {% for course in courses %}
+                        <option value="{{ course.name }}">{{ course.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Material Type</label>
+                <select name="material_type" class="form-select">
+                    <option value="PDF">PDF</option>
+                    <option value="Video">Video</option>
+                    <option value="External Link">External Link</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Upload File or Paste Link</label>
+                <input type="file" name="file" class="form-control">
+                <input type="url" name="link" class="form-control mt-2" placeholder="Or paste a link">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Set Availability</label>
+                <input type="datetime-local" name="availability_start" class="form-control mb-2">
+                <input type="datetime-local" name="availability_end" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success"><i class="bi bi-cloud-arrow-up-fill"></i> Upload</button>
+        </form>
+    </div>
+</div>
+
+<style>
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>
+{% endblock %}

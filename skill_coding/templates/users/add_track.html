@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5" data-aos="zoom-in" data-aos-delay="100">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card border-0 shadow-lg rounded-4">
+                <div class="card-header bg-gradient text-white text-center rounded-top-4"
+                     style="background: linear-gradient(135deg, #007bff, #00bcd4);">
+                    <h3 class="fw-semibold mb-0">🚀 Add New Coding Track</h3>
+                </div>
+                <div class="card-body px-4 py-5 bg-light rounded-bottom-4">
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <div class="mb-4">
+                            <label for="id_title" class="form-label fw-semibold">Track Title</label>
+                            <input type="text" name="title" id="id_title" class="form-control shadow-sm" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="id_description" class="form-label fw-semibold">Description</label>
+                            <textarea name="description" id="id_description" class="form-control shadow-sm" rows="4" required></textarea>
+                        </div>
+
+                        <div class="mb-5">
+                            <label for="id_difficulty" class="form-label fw-semibold">Difficulty</label>
+                            <select name="difficulty" id="id_difficulty" class="form-select shadow-sm" required>
+                                <option value="">Select</option>
+                                <option value="Beginner">Beginner</option>
+                                <option value="Intermediate">Intermediate</option>
+                                <option value="Advanced">Advanced</option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg shadow-sm">
+                                <i class="bi bi-rocket-takeoff me-1"></i> Create Track
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

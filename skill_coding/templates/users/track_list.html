@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container py-5" data-aos="fade-up">
+    <h2 class="mb-4 fw-bold text-primary text-center">
+        <i class="bi bi-diagram-3-fill me-2"></i> Explore Coding Tracks
+    </h2>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for track in tracks %}
+        <div class="col">
+            <div class="card h-100 shadow-sm border-light rounded-4" data-aos="zoom-in" data-aos-delay="{{ forloop.counter0|add:1 }}00">
+                <div class="card-body">
+                    <h5 class="card-title text-dark fw-semibold mb-3">{{ track.title }}</h5>
+                    <p class="card-text text-muted mb-3">{{ track.description|truncatewords:20 }}</p>
+                </div>
+                <div class="card-footer bg-transparent border-0">
+                    <a href="{% url 'skill_coding:track_detail' track.id %}" class="btn btn-outline-primary w-100 rounded-pill">
+                        <i class="bi bi-arrow-right-circle me-1"></i> Start Track
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col">
+            <div class="alert alert-warning text-center" role="alert">
+                🚧 No coding tracks available at the moment.
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

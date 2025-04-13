@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5" data-aos="fade-up">
+    <h2 class="fw-bold text-primary">{{ problem.title }}</h2>
+    <span class="badge bg-warning text-dark mb-4">{{ problem.difficulty }}</span>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h5 class="text-muted">📝 Description</h5>
+            <p class="card-text">{{ problem.description }}</p>
+
+            <h6 class="mt-4 text-secondary">📥 Sample Input:</h6>
+            <pre class="bg-light p-3 rounded border">{{ problem.sample_input }}</pre>
+
+            <h6 class="mt-3 text-secondary">📤 Sample Output:</h6>
+            <pre class="bg-light p-3 rounded border">{{ problem.sample_output }}</pre>
+        </div>
+    </div>
+
+    <form method="POST" action="{% url 'skill_coding:submit_code' problem.id %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="language" class="form-label fw-semibold">💻 Choose Language:</label>
+            <select class="form-select" id="language" name="language">
+                <option value="python3" {% if selected_language == "python3" %}selected{% endif %}>Python 3</option>
+                <option value="cpp" {% if selected_language == "cpp" %}selected{% endif %}>C++</option>
+                <option value="java" {% if selected_language == "java" %}selected{% endif %}>Java</option>
+                <option value="c" {% if selected_language == "c" %}selected{% endif %}>C</option>
+                <option value="javascript" {% if selected_language == "javascript" %}selected{% endif %}>JavaScript</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="codeArea" class="form-label fw-semibold">🧠 Your Solution:</label>
+            <textarea class="form-control shadow-sm" name="code" id="codeArea" rows="12" placeholder="# Write code here...">{% if submitted_code %}{{ submitted_code }}{% endif %}</textarea>
+        </div>
+
+        <div class="d-flex flex-wrap gap-2 mb-3">
+            <button type="submit" class="btn btn-success">
+                <i class="bi bi-upload"></i> Submit Code
+            </button>
+            <button type="button" id="askAssistantBtn" class="btn btn-outline-info">
+                🤖 Ask Assistant
+            </button>
+        </div>
+    </form>
+
+    {% if output %}
+        <div class="alert alert-info mt-4">
+            <h5 class="mb-1">📤 Output:</h5>
+            <pre>{{ output }}</pre>
+            <strong class="text-success">{{ verdict }}</strong>
+        </div>
+    {% endif %}
+
+    <div id="aiResponse" class="alert alert-secondary mt-4 d-none"></div>
+
+    <hr class="my-5">
+
+    <div>
+        <h5 class="mb-2">📌 Sample Input:</h5>
+        <pre>{{ problem.sample_input }}</pre>
+
+        <h5 class="mt-3">✅ Expected Output:</h5>
+        <pre>{{ problem.sample_output }}</pre>
+    </div>
+</div>
+
+<script>
+    document.getElementById("askAssistantBtn").addEventListener("click", function () {
+        const code = document.getElementById("codeArea").value;
+        fetch("{% url 'skill_coding:ask_assistant' %}", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': '{{ csrf_token }}',
+            },
+            body: new URLSearchParams({ code: code })
+        })
+        .then(response => response.json())
+        .then(data => {
+            const responseDiv = document.getElementById("aiResponse");
+            responseDiv.innerText = data.response;
+            responseDiv.classList.remove("d-none");
+        });
+    });
+</script>
+{% endblock %}

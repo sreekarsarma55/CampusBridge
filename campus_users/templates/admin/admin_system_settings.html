@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5 animate__animated animate__fadeIn">
+    <h2 class="fw-bold mb-4"><i class="bi bi-gear-fill"></i> System Settings</h2>
+    <div class="card shadow-lg p-4">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">Site Name</label>
+                <input type="text" class="form-control" name="site_name" value="{{ settings.site_name }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Admin Email</label>
+                <input type="email" class="form-control" name="admin_email" value="{{ settings.admin_email }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Default Language</label>
+                <select class="form-select" name="default_language">
+                    <option {% if settings.default_language == 'English' %}selected{% endif %}>English</option>
+                    <option {% if settings.default_language == 'Spanish' %}selected{% endif %}>Spanish</option>
+                    <option {% if settings.default_language == 'French' %}selected{% endif %}>French</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Save Changes</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

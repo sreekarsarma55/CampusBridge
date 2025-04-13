@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h3 class="fw-bold">👨‍💻 Coding Tracks</h3>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-3 shadow">
+                <div class="card-body">
+                    <h5 class="card-title">DSA Track</h5>
+                    <div class="progress mb-3" style="height: 10px;">
+                        <div class="progress-bar" style="width: 40%;" role="progressbar"></div>
+                    </div>
+                    <a href="#" class="btn btn-primary">Continue</a>
+                    <p>Streak: 5 Days</p>
+                </div>
+            </div>
+        </div>
+        <!-- Add similar cards for other tracks like Web Dev, Python, Java -->
+    </div>
+</div>
+{% endblock %}

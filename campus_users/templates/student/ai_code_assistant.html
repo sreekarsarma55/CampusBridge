@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h3 class="fw-bold">🤖 AI Code Assistant</h3>
+    <div class="card shadow">
+        <div class="card-body">
+            <div class="mb-3">
+                <label for="codeSnippet" class="form-label">Enter Code Snippet</label>
+                <textarea id="codeSnippet" rows="6" class="form-control" placeholder="Write your code here..."></textarea>
+            </div>
+            <div class="btn-group" role="group">
+                <button class="btn btn-primary">Debug</button>
+                <button class="btn btn-secondary">Suggest Improvement</button>
+                <button class="btn btn-info">Explain Logic</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

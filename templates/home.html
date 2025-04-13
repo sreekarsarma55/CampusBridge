@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Welcome to Campus Bridge{% endblock %}
+
+{% block content %}
+<div class="container d-flex flex-column align-items-center justify-content-center text-center px-4 py-5"
+     style="min-height: 85vh; background: linear-gradient(135deg, #f3f7fa, #e6f4f1); border-radius: 30px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);"
+     data-aos="fade-up" data-aos-delay="100">
+    
+    <h1 class="display-4 fw-bold text-primary mb-3">
+        👋 Welcome to <span class="text-success">Campus Bridge</span>
+    </h1>
+    
+    <p class="lead text-secondary mb-4">
+        Your all-in-one <strong>Academic LMS</strong> + <strong>Coding Skill Development</strong> platform 🚀<br>
+        <span class="text-info">Learn. Code. Track. Achieve. 🌟</span>
+    </p>
+
+    <div class="mt-5" data-aos="zoom-in" data-aos-delay="300">
+        <img src="{% static 'images/welcome-illustration.svg' %}" alt="Campus Illustration" class="img-fluid"
+             style="max-height: 320px;">
+    </div>
+</div>
+{% endblock %}

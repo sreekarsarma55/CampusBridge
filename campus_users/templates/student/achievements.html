@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5" style="animation: fadeIn 1s ease-in-out;">
+    <h3 class="fw-bold mb-4">🏆 Achievements</h3>
+    <div class="row">
+        <!-- Example Badge -->
+        <div class="col-md-3 mb-4">
+            <div class="card text-center border-0 shadow-lg rounded bg-light">
+                <div class="card-body">
+                    <i class="bi bi-star-fill text-warning display-4"></i>
+                    <h5 class="mt-3">Streak Master</h5>
+                    <p>Maintained a 10-day coding streak!</p>
+                </div>
+            </div>
+        </div>
+        <!-- Add more badges -->
+    </div>
+</div>
+
+<style>
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>
+{% endblock %}

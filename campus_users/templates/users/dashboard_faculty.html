@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="d-flex">
+    <!-- Sidebar -->
+    <div class="sidebar bg-gradient p-3 text-white position-sticky shadow-lg" style="width: 250px; height: 90vh; border-radius: 15px; animation: slideInLeft 0.8s ease-in-out;">
+        <h4 class="fw-bold mb-4" style="color: #6b6b6b;">Faculty Panel</h4>
+        <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white" href="{% url 'upload_content' %}">📤 Upload Materials</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white" href="{% url 'schedule_lectures_quizzes' %}">📅 Schedule Lectures & Quizzes</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white" href="{% url 'create_coding_assignments' %}">🧪 Create Coding Assignments</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white" href="{% url 'monitor_student_progress' %}">🧮 Monitor Student Progress</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white" href="{% url 'analytics_dashboard' %}">📈 Analytics Dashboard</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white" href="{% url 'announcements_faculty' %}">💬 Announcements</a>
+            </li>
+            <li class="nav-item mt-3">
+                <a class="nav-link text-danger fw-bold" href="{% url 'logout' %}">🚪 Logout</a>
+            </li>
+        </ul>
+    </div>
+    
+
+    <!-- Main Content -->
+    <div class="flex-grow-1 ms-4">
+        <div class="p-4 bg-white shadow rounded" style="animation: fadeIn 1s ease-in-out;">
+            <h3 class="fw-bold mb-3 text-primary">Welcome, {{ user.username }} 👋</h3>
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <div class="card text-center border-0 shadow rounded bg-info text-white">
+                        <div class="card-body">
+                            <h5>📤 Materials Uploaded</h5>
+                            <p class="display-6">{{ uploaded_materials }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-center border-0 shadow rounded bg-warning text-white">
+                        <div class="card-body">
+                            <h5>📊 Avg. Attendance</h5>
+                            <p class="display-6">{{ avg_attendance|floatformat:2 }}%</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-center border-0 shadow rounded bg-success text-white">
+                        <div class="card-body">
+                            <h5>📝 Assignments Created</h5>
+                            <p class="display-6">{{ created_assignments }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<style>
+@keyframes slideInLeft {
+    from { transform: translateX(-100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.sidebar {
+    background: white;
+}
+
+
+.sidebar .nav-link {
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    padding: 8px 15px;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #9b6baf !important; /* Purple hover */
+    color: white !important;
+    text-decoration: none !important;
+    transform: scale(1.02);
+}
+
+/* Card styles */
+.bg-info {
+    background-color: #1abc9c !important; /* Teal */
+}
+
+.bg-warning {
+    background-color: #f39c12 !important; /* Yellow */
+}
+
+.bg-success {
+    background-color: #2ecc71 !important; /* Green */
+}
+
+/* Text styles */
+.text-primary {
+    color: #3498db !important; /* Soft blue for headings */
+}
+</style>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4" data-aos="fade-up">
+    <h3 class="mb-4 text-primary fw-bold">
+        <i class="bi bi-book me-2"></i>{{ course.name }} - Chapters
+    </h3>
+
+    <div class="row">
+        {% for chapter in chapters %}
+        <div class="col-md-4 mb-3">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-dark">{{ chapter.name }}</h5>
+                    <p class="card-text text-muted">{{ chapter.description|default:"No description." }}</p>
+                    <a href="{% url 'academic_lms:student_chapter_detail' chapter.id %}" class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-file-text me-1"></i>View Materials
+                    </a>
+
+                    <a href="{% url 'academic_lms:view_student_attendance' chapter.id %}" class="btn btn-outline-info btn-sm">
+                        <i class="bi bi-calendar-check me-1"></i>View Attendance
+
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No chapters available for this course.</p>
+        {% endfor %}
+        <a href="{% url 'academic_lms:student_attendance_summary' %}" class="btn btn-outline-info btn-sm">
+            <i class="bi bi-calendar-check me-1"></i>View Attendance
+        </a>
+    </div>
+</div>
+{% endblock %}

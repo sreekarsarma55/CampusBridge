@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5 animate__animated animate__fadeIn">
+    <h2 class="fw-bold mb-4"><i class="bi bi-calendar-event"></i> Schedule Lectures & Quizzes</h2>
+    <div class="card shadow-lg p-4">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">Select Course</label>
+                <select name="course" class="form-select">
+                    <option selected disabled>Select course</option>
+                    {% for course in courses %}
+                        <option value="{{ course.name }}">{{ course.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Event Type</label>
+                <select name="event_type" class="form-select">
+                    <option value="Lecture">Lecture</option>
+                    <option value="Quiz">Quiz</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Date & Time</label>
+                <input type="datetime-local" name="date_time" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea name="description" class="form-control" rows="3" placeholder="Enter details..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-calendar-plus"></i> Schedule</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

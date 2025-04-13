@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5" data-aos="fade-up">
+    <h3 class="text-primary fw-bold mb-4">
+        <i class="bi bi-clock-history"></i> Your Submission History
+    </h3>
+
+    {% if submissions %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover shadow-sm align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Problem</th>
+                        <th scope="col">Submitted</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Score</th>
+                        <th scope="col">View Code</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for submission in submissions %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td class="fw-medium">{{ submission.problem.title }}</td>
+                        <td>{{ submission.submitted_at|date:"M d, Y • H:i A" }}</td>
+                        <td>
+                            {% if submission.is_correct %}
+                                <span class="badge rounded-pill bg-success px-3 py-2">Correct</span>
+                            {% else %}
+                                <span class="badge rounded-pill bg-danger px-3 py-2">Incorrect</span>
+                            {% endif %}
+                        </td>
+                        <td><strong>{{ submission.score }}</strong></td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#code{{ forloop.counter }}" aria-expanded="false" aria-controls="code{{ forloop.counter }}">
+                                <i class="bi bi-code-slash"></i> View
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="collapse bg-light" id="code{{ forloop.counter }}">
+                        <td colspan="6">
+                            <div class="p-3 rounded border bg-white shadow-sm">
+                                <h6 class="text-muted fw-bold mb-2">🧠 Submitted Code:</h6>
+                                <pre class="mb-0 text-wrap" style="white-space: pre-wrap;">{{ submission.submitted_code }}</pre>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center py-4">
+            <i class="bi bi-info-circle-fill me-2"></i> No submissions yet. Start solving and your history will appear here!
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h3 class="fw-bold">📘 My Courses</h3>
+    <div class="row">
+        <!-- Course Card Example -->
+        <div class="col-md-4">
+            <div class="card mb-3 shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Course Title</h5>
+                    <p class="card-text">Faculty: Dr. John Doe</p>
+                    <p class="card-text">Credits: 3</p>
+                    <div class="progress mb-3" style="height: 10px;">
+                        <div class="progress-bar" style="width: 75%;" role="progressbar"></div>
+                    </div>
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#overview">Overview</a></li>
+                        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#lectureNotes">Lecture Notes</a></li>
+                        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#resources">Resources</a></li>
+                        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#announcements">Announcements</a></li>
+                    </ul>
+                    <div class="tab-content mt-3">
+                        <div class="tab-pane active" id="overview">
+                            <p>Course overview content here.</p>
+                        </div>
+                        <div class="tab-pane" id="lectureNotes">
+                            <p>Lecture notes content here.</p>
+                        </div>
+                        <div class="tab-pane" id="resources">
+                            <p>Course resources content here.</p>
+                        </div>
+                        <div class="tab-pane" id="announcements">
+                            <p>Course announcements content here.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
